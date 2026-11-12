@@ -2,6 +2,12 @@
 
 Native Kotlin + Jetpack Compose client for **[P2PMine](https://p2pmine.com)** — Mine Peer to Peer.
 
+## Download the app
+
+Install file: [P2PMine-1.2.0.apk](download/P2PMine-1.2.0.apk)
+
+Direct link: https://github.com/Yasbir21Sidhu/p2pmine-android/raw/main/download/P2PMine-1.2.0.apk
+
 ## Production endpoints (configured)
 
 | Setting | Value |

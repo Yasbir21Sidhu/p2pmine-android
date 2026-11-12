@@ -30,6 +30,8 @@ Builds:
       - update-java-alternatives -a
     gradle:
       - yes
+    scanignore:
+      - download
 
 AllowedAPKSigningKeys: 7507b098044eefdf803a1d89e53eff5c1c6d56a55f4406a4c1ac6ec2c35f176b
 
