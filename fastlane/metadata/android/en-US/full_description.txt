@@ -1,0 +1,14 @@
+P2PMine is the official mobile dashboard for the p2pmine.com Bitcoin mining pool.
+
+• Live hashrate and unpaid balance
+• Worker list with stratum setup
+• Earnings and payout history
+• Request a payout to your BTC address
+• Optional biometric lock and two-factor authentication
+• Home-screen widget for hashrate, balance, and worker count
+
+Earnings shown in the app are after the published pool fee. The app talks only to p2pmine.com over HTTPS.
+
+Website: https://p2pmine.com
+Support: admin@p2pmine.com
+Privacy: https://p2pmine.com/privacy

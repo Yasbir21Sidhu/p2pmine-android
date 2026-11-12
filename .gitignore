@@ -1,0 +1,27 @@
+*.iml
+.gradle/
+.kotlin/
+/local.properties
+/.idea/
+.DS_Store
+/build
+/app/build
+/captures
+.externalNativeBuild
+.cxx
+*.apk
+*.ap_
+*.aab
+*.dm
+*.jks
+*.keystore
+google-services.json
+play-service-account.json
+keystore.properties
+
+# Release signing secrets. The example file is safe to commit.
+signing/*.jks
+signing/*.keystore
+signing/keystore.properties
+signing/READ_ME_BACKUP_THESE.txt
+signing/*.pem

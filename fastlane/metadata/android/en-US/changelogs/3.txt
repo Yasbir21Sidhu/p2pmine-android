@@ -1,0 +1,2 @@
+First release of the P2PMine pool dashboard.
+Live hashrate, workers, earnings, payouts, biometric lock, and two-factor authentication.
