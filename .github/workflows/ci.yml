@@ -1,16 +1,12 @@
 name: CI
 
+# Manual only. An automatic build was emailing a failure on every update
+# because GitHub's Android setup step is currently broken.
 on:
-  push:
-    branches: [main]
-  pull_request:
+  workflow_dispatch:
 
 permissions:
   contents: read
-
-concurrency:
-  group: ci-${{ github.ref }}
-  cancel-in-progress: true
 
 jobs:
   release-build:
@@ -20,18 +16,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-java@v4
+      - uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: 17
 
-      - uses: android-actions/setup-android@v3
-
-      - name: Install Android SDK 35
-        run: |
-          yes | sdkmanager --licenses >/dev/null || true
-          sdkmanager --install "platforms;android-35" "build-tools;35.0.0"
-
-      # F-Droid builds this same unsigned release task. No keystore is present.
       - name: Assemble release
         run: ./gradlew assembleRelease --stacktrace
