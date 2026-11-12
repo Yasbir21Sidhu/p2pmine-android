@@ -71,8 +71,9 @@ Later updates are the tag plus a changelog file. `UpdateCheckMode: Tags`
 and `AutoUpdateMode: Version` tell F-Droid to add a build for each new
 `v*` tag. The first inclusion still needs a person to merge it.
 
-The metadata declares the **NonFreeNet** anti-feature because the app only
-talks to p2pmine.com. The license in `LICENSE` is Apache-2.0. F-Droid will
+The metadata declares **NonFreeNet** and **TetheredNet** because the app
+only talks to p2pmine.com and the address cannot be changed in the app.
+The license in `LICENSE` is Apache-2.0. F-Droid will
 not list the app under another license, and it will not list it at all
 without a free license. Change `LICENSE` and the `License:` line before
 the first push if Apache-2.0 is not the license you want.

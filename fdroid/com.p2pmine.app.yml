@@ -19,12 +19,13 @@ Builds:
   - versionName: '1.2.0'
     versionCode: 3
     commit: v1.2.0
-    sudo:
-      - apt-get update
-      - apt-get install -y openjdk-17-jdk-headless
-      - update-alternatives --auto java
     gradle:
       - yes
+    srclibs:
+      - reproducible-apk-tools@v0.3.0
+    postbuild:
+      - mv $$OUT$$ unaligned.apk
+      - $$reproducible-apk-tools$$/zipalign.py --page-size 16 --pad-like-apksigner --replace unaligned.apk $$OUT$$
 
 AllowedAPKSigningKeys: 7507b098044eefdf803a1d89e53eff5c1c6d56a55f4406a4c1ac6ec2c35f176b
 
@@ -35,4 +36,6 @@ CurrentVersionCode: 3
 
 AntiFeatures:
   NonFreeNet:
-    en-US: This app only works with the p2pmine.com pool.
+    en-US: This app only connects to the p2pmine.com mining pool.
+  TetheredNet:
+    en-US: The server address is fixed to p2pmine.com and cannot be changed in the app.
