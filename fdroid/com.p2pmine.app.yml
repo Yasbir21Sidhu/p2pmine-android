@@ -1,5 +1,5 @@
 # Copy this file to fdroiddata as metadata/com.p2pmine.app.yml.
-# Replace every GITHUB_OWNER with the GitHub user or organization that owns the repo.
+# Repository owner: Yasbir21Sidhu.
 # Do not submit it until tag v1.2.0 exists on the public repo and the GitHub Release
 # contains P2PMine-1.2.0.apk signed with the upload key.
 
@@ -10,15 +10,15 @@ License: Apache-2.0
 AuthorName: P2PMine
 AuthorEmail: admin@p2pmine.com
 WebSite: https://p2pmine.com
-SourceCode: https://github.com/GITHUB_OWNER/p2pmine-android
-IssueTracker: https://github.com/GITHUB_OWNER/p2pmine-android/issues
-Changelog: https://github.com/GITHUB_OWNER/p2pmine-android/releases
+SourceCode: https://github.com/Yasbir21Sidhu/p2pmine-android
+IssueTracker: https://github.com/Yasbir21Sidhu/p2pmine-android/issues
+Changelog: https://github.com/Yasbir21Sidhu/p2pmine-android/releases
 
 AutoName: P2PMine
 
 RepoType: git
-Repo: https://github.com/GITHUB_OWNER/p2pmine-android.git
-Binaries: https://github.com/GITHUB_OWNER/p2pmine-android/releases/download/v%v/P2PMine-%v.apk
+Repo: https://github.com/Yasbir21Sidhu/p2pmine-android.git
+Binaries: https://github.com/Yasbir21Sidhu/p2pmine-android/releases/download/v%v/P2PMine-%v.apk
 
 Builds:
   - versionName: 1.2.0

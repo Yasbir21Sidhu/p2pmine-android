@@ -24,12 +24,12 @@ Obtainium cannot see a private repo. Then:
 
 ```bash
 cd ~/hashcore-android
-git remote add origin git@github.com:GITHUB_OWNER/p2pmine-android.git
+git remote add origin git@github.com:Yasbir21Sidhu/p2pmine-android.git
 git push -u origin main
 ```
 
-Replace `GITHUB_OWNER` in `fdroid/com.p2pmine.app.yml` with that owner
-before you send the file to F-Droid. The app build does not read that file.
+`fdroid/com.p2pmine.app.yml` already points at
+`Yasbir21Sidhu/p2pmine-android`. The app build does not read that file.
 
 In the repo settings, under **Secrets and variables → Actions**, add:
 
@@ -91,8 +91,7 @@ release:
 1. Copy `fdroid/com.p2pmine.app.yml` to
    [fdroiddata](https://gitlab.com/fdroid/fdroiddata) as
    `metadata/com.p2pmine.app.yml`.
-2. Replace `GITHUB_OWNER`.
-3. Open a merge request. The inclusion guide is
+2. Open a merge request. The inclusion guide is
    <https://f-droid.org/docs/Inclusion_How-To/>.
    A request for a brand-new app is also accepted by email to
    `team@f-droid.org`, but a merge request is the normal path.
@@ -113,6 +112,6 @@ Keep signing GitHub releases with that same upload key.
 
 ## Obtainium and similar APK installers
 
-Add `https://github.com/GITHUB_OWNER/p2pmine-android`. Obtainium uses the
+Add `https://github.com/Yasbir21Sidhu/p2pmine-android`. Obtainium uses the
 APK on the latest GitHub Release. Updates work only for installs that
 were first installed from that APK, because the signature has to match.
