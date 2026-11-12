@@ -11,6 +11,9 @@ permissions:
 jobs:
   publish:
     name: Sign and publish
+    # Skip when the upload key is not stored in GitHub. A tag can still
+    # carry a release built on a trusted machine.
+    if: ${{ secrets.ANDROID_KEYSTORE_BASE64 != '' }}
     runs-on: ubuntu-latest
     timeout-minutes: 60
     steps:
