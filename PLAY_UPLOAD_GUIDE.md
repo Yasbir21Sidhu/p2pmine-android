@@ -1,5 +1,9 @@
 # P2PMine — Google Play upload guide
 
+P2PMine is not being published on Google Play. Install from Obtainium or,
+once accepted, F-Droid. See the README. This file is only a leftover guide
+if that decision changes.
+
 Ongoing updates are built from a git tag. After the GitHub repo and Actions
 secrets in [RELEASING.md](RELEASING.md) are in place, `git push origin vX.Y.Z`
 publishes `P2PMine-X.Y.Z.aab` on the GitHub Release (and uploads it to the

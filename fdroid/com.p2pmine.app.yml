@@ -1,8 +1,3 @@
-# Copy this file to fdroiddata as metadata/com.p2pmine.app.yml.
-# Repository owner: Yasbir21Sidhu.
-# Do not submit it until tag v1.2.0 exists on the public repo and the GitHub Release
-# contains P2PMine-1.2.0.apk signed with the upload key.
-
 Categories:
   - Internet
   - Money
@@ -21,23 +16,21 @@ Repo: https://github.com/Yasbir21Sidhu/p2pmine-android.git
 Binaries: https://github.com/Yasbir21Sidhu/p2pmine-android/releases/download/v%v/P2PMine-%v.apk
 
 Builds:
-  - versionName: 1.2.0
+  - versionName: '1.2.0'
     versionCode: 3
     commit: v1.2.0
     sudo:
       - apt-get update
       - apt-get install -y openjdk-17-jdk-headless
-      - update-java-alternatives -a
+      - update-alternatives --auto java
     gradle:
       - yes
-    scanignore:
-      - download
 
 AllowedAPKSigningKeys: 7507b098044eefdf803a1d89e53eff5c1c6d56a55f4406a4c1ac6ec2c35f176b
 
 AutoUpdateMode: Version
 UpdateCheckMode: Tags
-CurrentVersion: 1.2.0
+CurrentVersion: '1.2.0'
 CurrentVersionCode: 3
 
 AntiFeatures:

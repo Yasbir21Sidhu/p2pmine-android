@@ -1,17 +1,17 @@
 # Releasing P2PMine updates
 
-One git tag publishes the files the stores update from. F-Droid builds
-from the tag. Google Play and direct-install apps use the files attached
-to the GitHub Release.
+Google Play is not used. One git tag publishes the GitHub Release that
+Obtainium installs. F-Droid, after the app is accepted, builds from that
+same tag.
 
-These three installs cannot update each other. Each one is signed by a
-different key:
+These installs cannot update each other when the signing key differs.
+Pick one channel per phone.
 
 | Channel | Who signs | How users update |
 |---|---|---|
-| Google Play | Google, after you upload the AAB with the upload key | Play Store |
 | GitHub Release APK | Your upload key (`signing/p2pmine-upload.jks`) | Obtainium, or any installer that watches that APK |
-| F-Droid | F-Droid, after it rebuilds the tag | F-Droid |
+| F-Droid | F-Droid's key, unless their rebuild matches the GitHub APK | F-Droid |
+| Google Play | Not in use | |
 
 Pick one channel per device. Back up `signing/p2pmine-upload.jks` and
 `signing/READ_ME_BACKUP_THESE.txt` offline. They are gitignored. If that
@@ -19,48 +19,25 @@ keystore is lost, Play and GitHub-APK updates of this package stop.
 
 ## One-time GitHub setup
 
-Create an empty **public** repository named `p2pmine-android`. F-Droid and
-Obtainium cannot see a private repo. Then:
-
-```bash
-cd ~/hashcore-android
-git remote add origin git@github.com:Yasbir21Sidhu/p2pmine-android.git
-git push -u origin main
-```
-
-`fdroid/com.p2pmine.app.yml` already points at
-`Yasbir21Sidhu/p2pmine-android`. The app build does not read that file.
-
-In the repo settings, under **Secrets and variables → Actions**, add:
-
-| Secret | Value |
-|---|---|
-| `ANDROID_KEYSTORE_BASE64` | `base64 -w0 signing/p2pmine-upload.jks` |
-| `ANDROID_KEYSTORE_PASSWORD` | `storePassword` from the offline backup |
-| `ANDROID_KEY_ALIAS` | `p2pmine_upload` |
-| `ANDROID_KEY_PASSWORD` | `keyPassword` from the offline backup |
-| `PLAY_SERVICE_ACCOUNT_JSON` | optional; full JSON key for Play uploads |
+The public repository is `Yasbir21Sidhu/p2pmine-android`. Obtainium and
+F-Droid cannot see a private repo. `fdroid/com.p2pmine.app.yml` already
+points at that address. The app build does not read that file.
 
 Do not paste the keystore or the passwords into a chat, a commit, or an
-issue. The release workflow writes them only on the runner, then discards
-the runner.
-
-`PLAY_SERVICE_ACCOUNT_JSON` is optional. Without it, download
-`P2PMine-<version>.aab` from the GitHub Release and upload it in Play
-Console. With it, the same tag is also uploaded to the **internal** track.
-Create the Play app and finish the first listing once by hand (see
-`PLAY_UPLOAD_GUIDE.md`) before expecting the API upload to succeed. The
-service account needs Play Console access and the Release permission.
+issue. The release workflow does not receive the keystore. Sign the APK
+on a machine that has `signing/`, then commit only `download/P2PMine-<version>.apk`.
 
 ## Every update
 
 1. Raise `versionCode` by 1 and set `versionName` in `app/build.gradle.kts`.
-   Play and F-Droid both reject a repeated `versionCode`.
+   F-Droid rejects a repeated `versionCode`. Android will not install an
+   update unless the new `versionCode` is higher.
 2. Add `fastlane/metadata/android/en-US/changelogs/<versionCode>.txt`.
    That text becomes the GitHub Release notes and the F-Droid changelog.
-3. Commit and push `main`. Wait until the **CI** workflow's unsigned
-   release build is green. That is the build F-Droid runs.
-4. Tag the same commit and push the tag. The tag must be `v` plus
+3. Build the signed release APK and copy it to
+   `download/P2PMine-<versionName>.apk`.
+4. Commit and push `main`.
+5. Tag that same commit and push the tag. The tag must be `v` plus
    `versionName`, for example `v1.2.0` for `1.2.0`.
 
 ```bash
@@ -68,25 +45,19 @@ git tag v1.2.0
 git push origin v1.2.0
 ```
 
-The **Release** workflow then:
-
-- fails if the tag does not match `versionName`, or the changelog file is missing
-- signs `P2PMine-<version>.apk` and `P2PMine-<version>.aab`
-- attaches both to the GitHub Release
-- uploads the AAB to Play's internal track when the Play secret is set
-
-Promote the Play release from internal to production in Play Console after
-you have installed it from Play and signed in.
-
-The R8 mapping file is uploaded to Play only. It is not attached to the
-public GitHub Release.
+The **Release** workflow then attaches `download/P2PMine-<versionName>.apk`
+to the GitHub Release. It does not build the app and it does not talk to
+Google Play. Obtainium installs that release APK.
 
 ## F-Droid
 
-F-Droid does not install your APK. It clones the tag, runs
-`./gradlew assembleRelease` with no keystore, and signs the result with
-its own key. After `v1.2.0` is on GitHub and the signed APK is on the
-release:
+F-Droid clones the tag and runs `./gradlew assembleRelease` with no
+keystore. `Binaries` and `AllowedAPKSigningKeys` ask F-Droid to publish
+the GitHub APK when that rebuild matches it, so Obtainium and F-Droid
+can share a signature. If the rebuild does not match, F-Droid will not
+publish until the recipe is adjusted, and a later F-Droid-signed build
+cannot update an Obtainium install. After `v1.2.0` is on GitHub and the
+signed APK is on the release:
 
 1. Copy `fdroid/com.p2pmine.app.yml` to
    [fdroiddata](https://gitlab.com/fdroid/fdroiddata) as

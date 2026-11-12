@@ -1,5 +1,7 @@
 # P2PMine — Google Play launch checklist
 
+P2PMine is not being published on Google Play. This checklist is unused.
+
 ## Security posture (as of this build)
 
 | Control | Status |
